@@ -21,7 +21,7 @@ const SubmissionModal = ({ assignmentId, onClose }: SubmissionsModalProps) => {
     const fetchSubmissions = async () => {
       try {
         const res = await axios.get(
-          `https://edutrack-backend-rw6y.onrender.com/api/submissions/assignment/${assignmentId}`
+          `http://localhost:8080/api/submissions/assignment/${assignmentId}`
         );
         setSubmissions(res.data);
         console.log(res.data);
@@ -56,7 +56,7 @@ const SubmissionModal = ({ assignmentId, onClose }: SubmissionsModalProps) => {
     }
     try {
       await axios.put(
-        `https://edutrack-backend-rw6y.onrender.com/api/submissions/${submissionId}/grade`,
+        `http://localhost:8080/api/submissions/${submissionId}/grade`,
         null,
         { params: { grade } }
       );
@@ -101,7 +101,7 @@ const SubmissionModal = ({ assignmentId, onClose }: SubmissionsModalProps) => {
                   <td className="border px-2 py-1">{submission.studentName}</td>
                   <td className="border px-2 py-1">
                     <a
-                      href={`https://edutrack-backend-rw6y.onrender.com${submission.fileUrl}`}
+                      href={`http://localhost:8080${submission.fileUrl}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 underline"

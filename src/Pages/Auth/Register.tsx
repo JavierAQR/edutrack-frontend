@@ -24,7 +24,7 @@ const Register = () => {
   const fetchInstitutions = async () => {
     try {
       const [instRes] = await Promise.all([
-        axios.get("https://edutrack-backend-rw6y.onrender.com/admin/institutions/dto"),
+        axios.get("http://localhost:8080/api/institutions/dto"),
       ]);
       setInstitutions(instRes.data);
     } catch (err) {
@@ -44,7 +44,7 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        "https://edutrack-backend-rw6y.onrender.com/api/auth/register",
+        "http://localhost:8080/api/auth/register",
         {
           username,
           name,

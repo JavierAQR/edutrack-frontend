@@ -35,7 +35,7 @@ const InstitutionManager = () => {
   const fetchInstitutions = async () => {
     try {
       const res = await axios.get(
-        "https://edutrack-backend-rw6y.onrender.com/api/institutions/dto"
+        "http://localhost:8080/api/institutions/dto"
       );
       setInstitutions(res.data);
     } catch (error) {
@@ -69,13 +69,13 @@ const InstitutionManager = () => {
         // Actualizar institución existente
 
         await axios.put(
-          `https://edutrack-backend-rw6y.onrender.com/api/institutions/${editingId}`,
+          `http://localhost:8080/api/institutions/${editingId}`,
           dataToSend
         );
       } else {
         // Crear nueva institución
         await axios.post(
-          "https://edutrack-backend-rw6y.onrender.com/api/institutions",
+          "http://localhost:8080/api/institutions",
           dataToSend
         );
       }
@@ -101,7 +101,7 @@ const InstitutionManager = () => {
     if (!confirm) return;
 
     try {
-      await axios.delete(`https://edutrack-backend-rw6y.onrender.com/api/institutions/${id}`);
+      await axios.delete(`http://localhost:8080/api/institutions/${id}`);
       fetchInstitutions();
     } catch (error) {
       console.error("Error al eliminar institución:", error);

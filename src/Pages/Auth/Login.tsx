@@ -28,7 +28,7 @@ const Login = () => {
   const checkProfileStatus = async (token: string) => {
     try {
       const response = await axios.get(
-        "https://edutrack-backend-rw6y.onrender.com/api/auth/profile-status",
+        "http://localhost:8080/api/auth/profile-status",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -85,7 +85,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "https://edutrack-backend-rw6y.onrender.com/api/auth/login",
+        "http://localhost:8080/api/auth/login",
         {
           username,
           password,

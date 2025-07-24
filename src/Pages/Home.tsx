@@ -1,13 +1,9 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import Navbar from "../Components/Navbar";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
-
-// Importaciones CSS
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import "swiper/css/autoplay";
-
 import { FaArrowAltCircleUp, FaCoins, FaGraduationCap, FaHeadset, FaLaptop, FaUsers } from "react-icons/fa";
 import type { ReactNode } from "react";
 
@@ -25,7 +21,7 @@ const Home = () => {
         style={{
           '--swiper-navigation-color': '#F6EAF9',
           '--swiper-pagination-color': '#F6EAF9',
-        } as React.CSSProperties}
+        }}
         pagination={{
           clickable: true,
         }}

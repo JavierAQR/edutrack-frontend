@@ -21,7 +21,7 @@ const AcademicLevelManager = () => {
   const fetchLevels = async () => {
     try {
       const res = await axios.get(
-        "https://edutrack-backend-rw6y.onrender.com/api/academic-levels"
+        "http://localhost:8080/api/academic-levels"
       );
       console.log(res.data.data);
       
@@ -40,12 +40,12 @@ const AcademicLevelManager = () => {
     try {
       if (isEditing && editingId !== null) {
         await axios.put(
-          `https://edutrack-backend-rw6y.onrender.com/api/academic-levels/${editingId}`,
+          `http://localhost:8080/api/academic-levels/${editingId}`,
           formData
         );
       } else {
         await axios.post(
-          "https://edutrack-backend-rw6y.onrender.com/api/academic-levels",
+          "http://localhost:8080/api/academic-levels",
           formData
         );
       }
@@ -70,7 +70,7 @@ const AcademicLevelManager = () => {
     );
     if (!confirm) return;
     try {
-      await axios.delete(`https://edutrack-backend-rw6y.onrender.com/api/academic-levels/${id}`);
+      await axios.delete(`http://localhost:8080/api/academic-levels/${id}`);
       fetchLevels();
     } catch (err) {
       console.error("Error al eliminar:", err);

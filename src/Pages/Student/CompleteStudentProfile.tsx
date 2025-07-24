@@ -45,11 +45,11 @@ const CompleteStudentProfile = () => {
       try {
         const user = JSON.parse(storedUser);
         console.log(user);
-        
+
         const institutionId = user.institutionId;
-        
+
         if (institutionId) {
-          const res = await axios.get(`https://edutrack-backend-rw6y.onrender.com/api/institutions/${institutionId}`);
+          const res = await axios.get(`http://localhost:8080/api/institutions/${institutionId}`);
           setSelectedInstitution(res.data.name);
         }
       } catch (error) {
@@ -61,9 +61,9 @@ const CompleteStudentProfile = () => {
   const loadAcademicLevels = async (institutionId: string) => {
     try {
       const res = await axios.get(
-        `https://edutrack-backend-rw6y.onrender.com/api/institution-academic-levels/by-institution/${institutionId}`
+        `http://localhost:8080/api/institution-academic-levels/by-institution/${institutionId}`
       );
-      setAvailableLevels(res.data);
+      setAvailableLevels(res.data.data || res.data);
       setAvailableGrades([]);
       setSelectedLevelId("");
       setProfileData((prev) => ({ ...prev, gradeId: "" }));
@@ -79,9 +79,9 @@ const CompleteStudentProfile = () => {
 
     try {
       const res = await axios.get(
-        `https://edutrack-backend-rw6y.onrender.com/api/grades/by-level/${id}`
+        `http://localhost:8080/api/grades/by-level/${id}`
       );
-      setAvailableGrades(res.data);
+      setAvailableGrades(res.data.data);
       setProfileData((prev) => ({ ...prev, gradeId: "" }));
     } catch (err) {
       console.error("Error cargando grados:", err);
@@ -114,7 +114,7 @@ const CompleteStudentProfile = () => {
       console.log(profileData);
 
       const response = await axios.post(
-        "https://edutrack-backend-rw6y.onrender.com/api/student-profile/create",
+        "http://localhost:8080/api/student-profile/create",
         profileData,
         {
           headers: {

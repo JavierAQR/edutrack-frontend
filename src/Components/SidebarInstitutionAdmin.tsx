@@ -1,17 +1,32 @@
 import { useState } from "react";
-import { RiAdminLine } from "react-icons/ri";
+import { RiBook2Line, RiGraduationCapLine, RiTeamLine, RiUser3Line } from "react-icons/ri";
 import { Outlet } from "react-router-dom";
 import type { MenuItem } from "../types";
 import UserLayout from "./UserLayout";
 
 const menuItems: MenuItem[] = [
   {
-    icons: <RiAdminLine size={30} />,
-    label: "Grados",
-    href: "/institution-admin",
+    icons: <RiGraduationCapLine size={20} />,
+    label: "Grados Académicos",
+    href: "/institution-admin/grades",
   },
   {
-    icons: <RiAdminLine size={30} />,
+    icons: <RiUser3Line size={20} />,
+    label: "Profesores",
+    href: "/institution-admin/teachers",
+  },
+  {
+    icons: <RiTeamLine size={20} />,
+    label: "Estudiantes",
+    href: "/institution-admin/students",
+  },
+  {
+    icons: <RiBook2Line size={20} />,
+    label: "Cursos",
+    href: "/institution-admin/courses",
+  },
+  {
+    icons: <RiGraduationCapLine size={20} />,
     label: "Secciones",
     href: "/institution-admin/sections",
   },

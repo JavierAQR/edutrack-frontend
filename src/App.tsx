@@ -5,6 +5,7 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
+
 import { AuthProvider } from "./context/AuthContext";
 import Login from "./Pages/Auth/Login";
 import Register from "./Pages/Auth/Register";
@@ -22,6 +23,7 @@ import GradeManager from "./Pages/Admin/GradeManager";
 import CourseAssignmentManager from "./Pages/Admin/CourseAssignmentManager";
 import Dashboard from "./Pages/Admin/Dashboard";
 import TeacherManager from "./Pages/Admin/TeacherManager";
+import Institution_TeacherManager from "./Pages/Institution_Admin/TeacherManager";
 import CompleteTeacherProfile from "./Pages/Teacher/CompleteTeacherProfile";
 import TeacherProfile from "./Pages/Teacher/TeacherProfile";
 import SidebarTeacher from "./Components/SidebarTeacher";
@@ -30,6 +32,7 @@ import VerificationRole from "./Components/VerificationRole";
 import SidebarStudent from "./Components/SidebarStudent";
 import StudentProfile from "./Pages/Student/StudentProfile";
 import StudentManager from "./Pages/Admin/StudentManager";
+import Institution_StudentManager from "./Pages/Institution_Admin/StudentManager";
 import SidebarInstitutionAdmin from "./Components/SidebarInstitutionAdmin";
 import InstitutionGradeManager from "./Pages/Admin/InstitutionGradeManager";
 import SectionManager from "./Pages/Institution_Admin/Section/SectionManager";
@@ -37,6 +40,9 @@ import TeacherSections from "./Pages/Teacher/TeacherSections";
 import DetalleSeccion from "./Pages/Teacher/DetalleSeccion";
 import TareasSeccion from "./Pages/Teacher/TareasSeccion";
 import StudentSectionsView from "./Pages/Student/StudentSectionsView";
+import Institution_CourseManager from "./Pages/Institution_Admin/CourseManager";
+import PagoStudent from "./Pages/Student/PagoStudent";
+
 
 function App() {
   return (
@@ -54,16 +60,14 @@ function App() {
             <Route path="verification" element={<VerificationPage />} />
           </Route>
 
-          {/* Rutas de administrador */}
-          <Route
-            element={<VerificationRole allowedRoles={["INSTITUTION_ADMIN"]} />}
-          >
-            <Route
-              path="/institution-admin"
-              element={<SidebarInstitutionAdmin />}
-            >
+          {/* Rutas de administrador por institución */}
+          <Route element={<VerificationRole allowedRoles={["INSTITUTION_ADMIN"]} />}>
+            <Route path="/institution-admin" element={<SidebarInstitutionAdmin />}>
               <Route index element={<Navigate to="grades" replace />} />
               <Route path="grades" element={<InstitutionGradeManager />} />
+              <Route path="teachers" element={<Institution_TeacherManager />} />
+              <Route path="students" element={<Institution_StudentManager />} />
+              <Route path="courses" element={<Institution_CourseManager />} />
               <Route path="sections" element={<SectionManager />} />
             </Route>
           </Route>
@@ -75,6 +79,7 @@ function App() {
               <Route path="perfil" element={<StudentProfile />} />
               <Route path="sections" element={<StudentSectionsView />} />
               <Route path="payments" element={<PaymentPage />} />
+              <Route path="pagos" element={<PagoStudent />} /> 
             </Route>
             <Route
               path="complete-student-profile"
