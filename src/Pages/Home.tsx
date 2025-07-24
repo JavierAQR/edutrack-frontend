@@ -25,7 +25,7 @@ const Home = () => {
         style={{
           '--swiper-navigation-color': '#F6EAF9',
           '--swiper-pagination-color': '#F6EAF9',
-        }}
+        } as React.CSSProperties}
         pagination={{
           clickable: true,
         }}
