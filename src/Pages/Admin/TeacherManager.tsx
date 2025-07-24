@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import TeacherForm from "./TeacherForm";
 
-interface TeacherDTO {
+export interface TeacherDTO {
   id: number;
   username: string;
   name: string;

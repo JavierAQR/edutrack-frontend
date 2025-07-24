@@ -1,21 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import type { TeacherDTO } from "./TeacherManager";
 
 interface TeacherFormProps {
-    initialData: {
-        id?: number;
-        username?: string;
-        name?: string;
-        lastname?: string;
-        email?: string;
-        birthdate?: string;
-        enabled?: boolean;
-        degree?: string;
-        specialization?: string;
-        teachingExperience?: number;
-        biography?: string;
-        cvUrl?: string;
-    };
+    initialData: TeacherDTO | null;
     isEditing: boolean;
     onSubmit: () => void;
     onCancel: () => void;
