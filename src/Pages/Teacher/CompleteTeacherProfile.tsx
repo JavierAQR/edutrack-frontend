@@ -42,7 +42,7 @@ const CompleteTeacherProfile = () => {
       const token = localStorage.getItem("token");
 
       const response = await axios.post(
-        "http://localhost:8080/api/teacher-profile/create",
+        "https://edutrack-backend-rw6y.onrender.com/api/teacher-profile/create",
         profileData,
         {
           headers: {

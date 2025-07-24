@@ -38,9 +38,9 @@ const CourseManager = () => {
   const fetchAll = async () => {
     try {
       const [courseRes, gradeRes, instRes] = await Promise.all([
-        axios.get("http://localhost:8080/api/courses"),
-        axios.get("http://localhost:8080/api/grades"),
-        axios.get("http://localhost:8080/api/institutions/dto"),
+        axios.get("https://edutrack-backend-rw6y.onrender.com/api/courses"),
+        axios.get("https://edutrack-backend-rw6y.onrender.com/api/grades"),
+        axios.get("https://edutrack-backend-rw6y.onrender.com/api/institutions/dto"),
       ]);
       setCourses(courseRes.data);
       setGrades(gradeRes.data.data);
@@ -65,7 +65,7 @@ const CourseManager = () => {
 
     try {
       const res = await axios.get(
-        `http://localhost:8080/api/institution-academic-levels/by-institution/${id}`
+        `https://edutrack-backend-rw6y.onrender.com/api/institution-academic-levels/by-institution/${id}`
       );
       setAvailableLevels(res.data);
       setAvailableGrades([]);
@@ -83,7 +83,7 @@ const CourseManager = () => {
 
     try {
       const res = await axios.get(
-        `http://localhost:8080/api/grades/by-level/${id}`
+        `https://edutrack-backend-rw6y.onrender.com/api/grades/by-level/${id}`
       );
       setAvailableGrades(res.data.data);
     } catch (err) {
@@ -106,11 +106,11 @@ const CourseManager = () => {
     try {
       if (isEditing && editingId !== null) {
         await axios.put(
-          `http://localhost:8080/api/courses/${editingId}`,
+          `https://edutrack-backend-rw6y.onrender.com/api/courses/${editingId}`,
           formData
         );
       } else {
-        await axios.post("http://localhost:8080/api/courses", formData);
+        await axios.post("https://edutrack-backend-rw6y.onrender.com/api/courses", formData);
       }
       setFormData(initialForm);
       setIsEditing(false);
@@ -131,14 +131,14 @@ const CourseManager = () => {
     try {
       // Cargar niveles de la institución
       const levelRes = await axios.get(
-        `http://localhost:8080/api/institution-academic-levels/by-institution/${institutionId}`
+        `https://edutrack-backend-rw6y.onrender.com/api/institution-academic-levels/by-institution/${institutionId}`
       );
       
       setAvailableLevels(levelRes.data);
   
       // Cargar grados del nivel
       const gradeRes = await axios.get(
-        `http://localhost:8080/api/grades/by-level/${levelId}`
+        `https://edutrack-backend-rw6y.onrender.com/api/grades/by-level/${levelId}`
       );
       setAvailableGrades(gradeRes.data.data);
   
@@ -164,7 +164,7 @@ const CourseManager = () => {
 
   const handleDelete = async (id: number) => {
     if (confirm("¿Seguro que deseas eliminar este curso?")) {
-      await axios.delete(`http://localhost:8080/api/courses/${id}`);
+      await axios.delete(`https://edutrack-backend-rw6y.onrender.com/api/courses/${id}`);
       fetchAll();
     }
   };

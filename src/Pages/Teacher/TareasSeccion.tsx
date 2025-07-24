@@ -33,7 +33,7 @@ const TareasSeccion = () => {
   const fetchTareas = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:8080/api/assignments/section/${sectionId}`
+        `https://edutrack-backend-rw6y.onrender.com/api/assignments/section/${sectionId}`
       );
       console.log(res.data);
       
@@ -59,7 +59,7 @@ const TareasSeccion = () => {
     if (form.file) formData.append("file", form.file);
 
     try {
-      await axios.post("http://localhost:8080/api/assignments", formData);
+      await axios.post("https://edutrack-backend-rw6y.onrender.com/api/assignments", formData);
       setShowModal(false);
       setForm({
         title: "",
@@ -104,7 +104,7 @@ const TareasSeccion = () => {
                 {tarea.fileUrl && (
                   <button className="mt-2 px-3 py-1 bg-yellow-600 text-white rounded hover:bg-yellow-700">
                     <a
-                      href={`http://localhost:8080${tarea.fileUrl}`}
+                      href={`https://edutrack-backend-rw6y.onrender.com${tarea.fileUrl}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-white-600 "

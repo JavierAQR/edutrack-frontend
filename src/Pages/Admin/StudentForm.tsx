@@ -73,7 +73,7 @@ const StudentForm: React.FC<StudentFormProps> = ({
     const fetchInstitutions = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:8080/api/institutions/dto"
+          "https://edutrack-backend-rw6y.onrender.com/api/institutions/dto"
         );
         setInstitutions(res.data);
         setLoadingInstitutions(false);
@@ -94,14 +94,14 @@ const StudentForm: React.FC<StudentFormProps> = ({
           // Primero necesitamos obtener los detalles completos del estudiante
           // incluyendo institutionId y academicLevelId
           const studentRes = await axios.get(
-            `http://localhost:8080/admin/students/${initialData.id}`
+            `https://edutrack-backend-rw6y.onrender.com/admin/students/${initialData.id}`
           );
           const studentData = studentRes.data;
 
           // Cargar niveles de la institución
           if (studentData.institutionId) {
             const levelRes = await axios.get(
-              `http://localhost:8080/api/institution-academic-levels/by-institution/${studentData.institutionId}`
+              `https://edutrack-backend-rw6y.onrender.com/api/institution-academic-levels/by-institution/${studentData.institutionId}`
             );
             setAvailableLevels(levelRes.data);
           }
@@ -109,7 +109,7 @@ const StudentForm: React.FC<StudentFormProps> = ({
           // Cargar grados del nivel
           if (studentData.academicLevelId) {
             const gradeRes = await axios.get(
-              `http://localhost:8080/api/grades/by-level/${studentData.academicLevelId}`
+              `https://edutrack-backend-rw6y.onrender.com/api/grades/by-level/${studentData.academicLevelId}`
             );
             console.log(gradeRes);
             
@@ -157,7 +157,7 @@ const StudentForm: React.FC<StudentFormProps> = ({
       try {
         setLoadingLevels(true);
         const res = await axios.get(
-          `http://localhost:8080/api/institution-academic-levels/by-institution/${institutionId}`
+          `https://edutrack-backend-rw6y.onrender.com/api/institution-academic-levels/by-institution/${institutionId}`
         );
         setAvailableLevels(res.data);
         setAvailableGrades([]);
@@ -189,7 +189,7 @@ const StudentForm: React.FC<StudentFormProps> = ({
       try {
         setLoadingGrades(true);
         const res = await axios.get(
-          `http://localhost:8080/api/grades/by-level/${levelId}`
+          `https://edutrack-backend-rw6y.onrender.com/api/grades/by-level/${levelId}`
         );
         setAvailableGrades(res.data.data);
         setLoadingGrades(false);
@@ -229,11 +229,11 @@ const StudentForm: React.FC<StudentFormProps> = ({
 
       if (isEditing && initialData?.id) {
         await axios.put(
-          `http://localhost:8080/admin/students/${initialData.id}`,
+          `https://edutrack-backend-rw6y.onrender.com/admin/students/${initialData.id}`,
           payload
         );
       } else {
-        await axios.post("http://localhost:8080/admin/students", payload);
+        await axios.post("https://edutrack-backend-rw6y.onrender.com/admin/students", payload);
       }
       onSubmit();
     } catch (err) {

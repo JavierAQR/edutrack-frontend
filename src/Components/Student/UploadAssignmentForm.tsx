@@ -24,7 +24,7 @@ const UploadAssignmentForm = ({ assignmentId, studentId, onSuccess, onClose }: P
     formData.append("comment", comment);
 
     try {
-      await axios.post("http://localhost:8080/api/submissions", formData, {
+      await axios.post("https://edutrack-backend-rw6y.onrender.com/api/submissions", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       setMessage("Tarea enviada exitosamente ✅");

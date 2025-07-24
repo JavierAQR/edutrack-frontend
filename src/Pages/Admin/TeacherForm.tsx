@@ -75,11 +75,11 @@ const TeacherForm = ({ initialData, isEditing, onSubmit, onCancel }: TeacherForm
         try {
             if (isEditing && initialData?.id) {
                 await axios.put(
-                    `http://localhost:8080/api/teachers/${initialData.id}`,
+                    `https://edutrack-backend-rw6y.onrender.com/api/teachers/${initialData.id}`,
                     formData
                 );
             } else {
-                await axios.post("http://localhost:8080/api/teachers", formData);
+                await axios.post("https://edutrack-backend-rw6y.onrender.com/api/teachers", formData);
             }
             onSubmit();
         } catch (err) {

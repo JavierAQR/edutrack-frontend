@@ -69,21 +69,21 @@ const SectionManager = () => {
 
   const fetchSections = useCallback(async () => {
     const res = await axios.get(
-      `http://localhost:8080/api/sections/institution/${institutionId}`
+      `https://edutrack-backend-rw6y.onrender.com/api/sections/institution/${institutionId}`
     );
     setSections(res.data);
   }, [institutionId]);
 
   const fetchGrades = useCallback(async () => {
     const res = await axios.get(
-      `http://localhost:8080/api/grades/by-level/${selectedAcademicLevelId}`
+      `https://edutrack-backend-rw6y.onrender.com/api/grades/by-level/${selectedAcademicLevelId}`
     );
     setGrades(res.data.data);
   }, [selectedAcademicLevelId]);
 
   const fetchAcademicLevels = useCallback(async () => {
     const res = await axios.get(
-      `http://localhost:8080/api/institution-academic-levels/by-institution/${institutionId}`
+      `https://edutrack-backend-rw6y.onrender.com/api/institution-academic-levels/by-institution/${institutionId}`
     );
     setAcademicLevels(res.data);
   }, [institutionId]);
@@ -91,14 +91,14 @@ const SectionManager = () => {
   const fetchCourses = useCallback(async () => {
     if (!selectedGradeId) return;
     const res = await axios.get(
-      `http://localhost:8080/api/courses/by-grade/${selectedGradeId}`
+      `https://edutrack-backend-rw6y.onrender.com/api/courses/by-grade/${selectedGradeId}`
     );
     setCourses(res.data);
   }, [selectedGradeId]);
 
   const fetchTeachers = useCallback(async () => {
     const res = await axios.get(
-      `http://localhost:8080/api/teacher-profile/institution/${institutionId}`
+      `https://edutrack-backend-rw6y.onrender.com/api/teacher-profile/institution/${institutionId}`
     );
     setTeachers(res.data);
   }, [institutionId]);
@@ -106,7 +106,7 @@ const SectionManager = () => {
   const fetchStudents = useCallback(async () => {
     if (!selectedGradeId) return;
     const res = await axios.get(
-      `http://localhost:8080/api/student-profile/by-grade-and-institution?gradeId=${selectedGradeId}&institutionId=${institutionId}`
+      `https://edutrack-backend-rw6y.onrender.com/api/student-profile/by-grade-and-institution?gradeId=${selectedGradeId}&institutionId=${institutionId}`
     );
     setStudents(res.data);
   }, [selectedGradeId, institutionId]);
@@ -133,7 +133,7 @@ const SectionManager = () => {
   
     try {
       const studentsRes = await axios.get(
-        `http://localhost:8080/api/student-profile/by-grade-and-institution?gradeId=${section.gradeId}&institutionId=${institutionId}`
+        `https://edutrack-backend-rw6y.onrender.com/api/student-profile/by-grade-and-institution?gradeId=${section.gradeId}&institutionId=${institutionId}`
       );
       setStudents(studentsRes.data);
     } catch (error) {
@@ -142,7 +142,7 @@ const SectionManager = () => {
 
     try {
       const res = await axios.get(
-        `http://localhost:8080/api/sections/${section.id}/students`
+        `https://edutrack-backend-rw6y.onrender.com/api/sections/${section.id}/students`
       );
       const assignedStudents = res.data;
       const assignedIds = assignedStudents.map((s: Student) => s.id);
@@ -175,7 +175,7 @@ const SectionManager = () => {
         };
   
         await axios.post(
-          "http://localhost:8080/api/sections",
+          "https://edutrack-backend-rw6y.onrender.com/api/sections",
           payload
         );
   
@@ -191,7 +191,7 @@ const SectionManager = () => {
     if (!editingSection) return;
 
     await axios.put(
-      `http://localhost:8080/api/sections/${editingSection.id}/students`,
+      `https://edutrack-backend-rw6y.onrender.com/api/sections/${editingSection.id}/students`,
       { studentIds }
     );
   

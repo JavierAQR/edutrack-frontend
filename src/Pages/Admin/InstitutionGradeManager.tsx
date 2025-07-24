@@ -51,8 +51,8 @@ const InstitutionGradeManager = () => {
   const fetchData = async () => {
     try {
       const [igRes, instRes] = await Promise.all([
-        axios.get("http://localhost:8080/api/institution-grades"),
-        axios.get("http://localhost:8080/api/institutions/dto"),
+        axios.get("https://edutrack-backend-rw6y.onrender.com/api/institution-grades"),
+        axios.get("https://edutrack-backend-rw6y.onrender.com/api/institutions/dto"),
       ]);
       setInstitutionGrades(igRes.data);
       setInstitutions(instRes.data);
@@ -78,7 +78,7 @@ const InstitutionGradeManager = () => {
       if (!isNaN(parsedValue)) {
         axios
           .get(
-            `http://localhost:8080/api/institution-academic-levels/by-institution/${parsedValue}`
+            `https://edutrack-backend-rw6y.onrender.com/api/institution-academic-levels/by-institution/${parsedValue}`
           )
           .then((res) => {
             setAvailableLevels(res.data);
@@ -94,7 +94,7 @@ const InstitutionGradeManager = () => {
     if (name === "academicLevelId") {
       if (!isNaN(parsedValue)) {
         axios
-          .get(`http://localhost:8080/api/grades/by-level/${parsedValue}`)
+          .get(`https://edutrack-backend-rw6y.onrender.com/api/grades/by-level/${parsedValue}`)
           .then((res) => {
             setAvailableGrades(res.data.data);
           })
@@ -111,12 +111,12 @@ const InstitutionGradeManager = () => {
     try {
       if (isEditing && editingId !== null) {
         await axios.put(
-          `http://localhost:8080/api/institution-grades/${editingId}`,
+          `https://edutrack-backend-rw6y.onrender.com/api/institution-grades/${editingId}`,
           formData
         );
       } else {
         await axios.post(
-          "http://localhost:8080/api/institution-grades",
+          "https://edutrack-backend-rw6y.onrender.com/api/institution-grades",
           formData
         );
       }
@@ -141,13 +141,13 @@ const InstitutionGradeManager = () => {
     // Precargar niveles y grados disponibles para edición
     axios
       .get(
-        `http://localhost:8080/api/institution-academic-levels/by-institution/${data.institutionId}`
+        `https://edutrack-backend-rw6y.onrender.com/api/institution-academic-levels/by-institution/${data.institutionId}`
       )
       .then((res) => setAvailableLevels(res.data));
 
     axios
       .get(
-        `http://localhost:8080/api/grades/by-level/${data.academicLevelId}`
+        `https://edutrack-backend-rw6y.onrender.com/api/grades/by-level/${data.academicLevelId}`
       )
       .then((res) => setAvailableGrades(res.data));
   };
@@ -157,7 +157,7 @@ const InstitutionGradeManager = () => {
     if (!confirm) return;
     try {
       await axios.delete(
-        `http://localhost:8080/api/institution-grades/${id}`
+        `https://edutrack-backend-rw6y.onrender.com/api/institution-grades/${id}`
       );
       fetchData();
     } catch (err) {

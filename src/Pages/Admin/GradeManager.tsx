@@ -33,8 +33,8 @@ const GradeManager = () => {
   const fetchGrades = async () => {
     try {
      const [gradeRes, levelRes] = await Promise.all([
-            axios.get("http://localhost:8080/api/grades"),
-            axios.get("http://localhost:8080/api/academic-levels"),
+            axios.get("https://edutrack-backend-rw6y.onrender.com/api/grades"),
+            axios.get("https://edutrack-backend-rw6y.onrender.com/api/academic-levels"),
       ]);
       setGrades(gradeRes.data.data);
       setAcademicLevels(levelRes.data.data);
@@ -59,11 +59,11 @@ const GradeManager = () => {
     try {
       if (isEditing && editingId !== null) {
         await axios.put(
-          `http://localhost:8080/api/grades/${editingId}`,
+          `https://edutrack-backend-rw6y.onrender.com/api/grades/${editingId}`,
           formData
         );
       } else {
-        await axios.post("http://localhost:8080/api/grades", formData);
+        await axios.post("https://edutrack-backend-rw6y.onrender.com/api/grades", formData);
       }
       setFormData(initialForm);
       setIsEditing(false);
@@ -85,7 +85,7 @@ const GradeManager = () => {
     if (!confirm) return;
 
     try {
-      await axios.delete(`http://localhost:8080/api/grades/${id}`);
+      await axios.delete(`https://edutrack-backend-rw6y.onrender.com/api/grades/${id}`);
       fetchGrades();
     } catch (error) {
       console.error("Error al eliminar grado:", error);

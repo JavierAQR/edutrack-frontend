@@ -32,7 +32,7 @@ const StudentSectionsView = () => {
     if (studentId) {
       axios
         .get(
-          `http://localhost:8080/api/sections/dashboard/student/${studentId}`
+          `https://edutrack-backend-rw6y.onrender.com/api/sections/dashboard/student/${studentId}`
         )
         .then((res) => {
           console.log(res.data);
@@ -91,7 +91,7 @@ const StudentSectionsView = () => {
                     </button>
                     <button className="ml-2 px-3 py-1 bg-yellow-600 text-white rounded hover:bg-yellow-700">
                       <a
-                        href={`http://localhost:8080${a.fileUrl}`}
+                        href={`https://edutrack-backend-rw6y.onrender.com${a.fileUrl}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-white-600 "
@@ -118,7 +118,7 @@ const StudentSectionsView = () => {
                     <li key={a.assignmentId}>{a.title} (Entregado)</li>
                     <button className="px-3 py-1 bg-yellow-600 text-white rounded hover:bg-yellow-700">
                       <a
-                        href={`http://localhost:8080${a.fileUrl}`}
+                        href={`https://edutrack-backend-rw6y.onrender.com${a.fileUrl}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-white-600 "
@@ -151,7 +151,7 @@ const StudentSectionsView = () => {
                 if (studentId) {
                   axios
                     .get(
-                      `http://localhost:8080/api/sections/dashboard/student/${studentId}`
+                      `https://edutrack-backend-rw6y.onrender.com/api/sections/dashboard/student/${studentId}`
                     )
                     .then((res) => setSections(res.data));
                 }

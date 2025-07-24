@@ -34,7 +34,7 @@ const InstitutionAcademicLevelManager = () => {
 
   const fetchInstitutions = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/api/institutions/dto");
+      const res = await axios.get("https://edutrack-backend-rw6y.onrender.com/api/institutions/dto");
       setInstitutions(res.data);
     } catch (err) {
       console.error("Error al cargar instituciones:", err);
@@ -43,7 +43,7 @@ const InstitutionAcademicLevelManager = () => {
 
   const fetchAcademicLevels = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/api/academic-levels");
+      const res = await axios.get("https://edutrack-backend-rw6y.onrender.com/api/academic-levels");
       setAcademicLevels(res.data.data);
     } catch (err) {
       console.error("Error al cargar niveles:", err);
@@ -53,7 +53,7 @@ const InstitutionAcademicLevelManager = () => {
   const fetchRelations = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8080/api/institution-academic-levels"
+        "https://edutrack-backend-rw6y.onrender.com/api/institution-academic-levels"
       );
       setRelations(res.data);
     } catch (err) {
@@ -70,7 +70,7 @@ const InstitutionAcademicLevelManager = () => {
 
     try {
       await axios.post(
-        "http://localhost:8080/api/institution-academic-levels",
+        "https://edutrack-backend-rw6y.onrender.com/api/institution-academic-levels",
         null,
         {
           params: {
@@ -92,7 +92,7 @@ const InstitutionAcademicLevelManager = () => {
     if (!window.confirm("¿Estás seguro de eliminar esta relación?")) return;
     try {
       await axios.delete(
-        `http://localhost:8080/api/institution-academic-levels/${id}`
+        `https://edutrack-backend-rw6y.onrender.com/api/institution-academic-levels/${id}`
       );
       fetchRelations();
     } catch (err) {
