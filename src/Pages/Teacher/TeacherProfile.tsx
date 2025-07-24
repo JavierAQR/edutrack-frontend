@@ -46,7 +46,7 @@ const TeacherProfile = () => {
       setLoading(true);
       const token = localStorage.getItem("token");
       const response = await fetch(
-        "http://localhost:8080/api/teacher-profile/my-profile",
+        "https://edutrack-backend-rw6y.onrender.com/api/teacher-profile/my-profile",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -120,7 +120,7 @@ const TeacherProfile = () => {
       }
       const token = localStorage.getItem("token");
       const response = await fetch(
-        "http://localhost:8080/api/teacher-profile/update-professional-info",
+        "https://edutrack-backend-rw6y.onrender.com/api/teacher-profile/update-professional-info",
         {
           method: "PUT",
           headers: {

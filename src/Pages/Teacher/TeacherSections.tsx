@@ -13,7 +13,7 @@ const TeacherSections = () => {
     useEffect(() => {
       const fetchSections = async () => {
         try {
-          const response = await axios.get<Section[]>(`http://localhost:8080/api/sections/by-teacher/${teacherId}`);
+          const response = await axios.get<Section[]>(`https://edutrack-backend-rw6y.onrender.com/api/sections/by-teacher/${teacherId}`);
           setSections(response.data);
         } catch (error) {
           console.error('Error al obtener las secciones del profesor', error);

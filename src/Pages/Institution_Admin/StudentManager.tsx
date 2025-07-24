@@ -83,7 +83,7 @@ const StudentManager = () => {
             if (!token) throw new Error("No authentication token found");
 
             const response = await axios.get(
-                "http://localhost:8080/api/institution-admin/students",
+                "https://edutrack-backend-rw6y.onrender.com/api/institution-admin/students",
                 { headers: { Authorization: `Bearer ${token}` } }
             );
 
@@ -118,7 +118,7 @@ const StudentManager = () => {
             if (!token) return;
 
             const response = await axios.get(
-                "http://localhost:8080/api/institution-admin/academic-levels",
+                "https://edutrack-backend-rw6y.onrender.com/api/institution-admin/academic-levels",
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             setAcademicLevels(response.data);
@@ -157,7 +157,7 @@ const StudentManager = () => {
             if (!token) throw new Error("No authentication token found");
 
             await axios.delete(
-                `http://localhost:8080/api/institution-admin/students/${id}`,
+                `https://edutrack-backend-rw6y.onrender.com/api/institution-admin/students/${id}`,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             fetchStudents();

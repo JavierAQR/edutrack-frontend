@@ -14,7 +14,7 @@ const PaymentsTable: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/payments')
+    fetch('https://edutrack-backend-rw6y.onrender.com/api/payments')
       .then(res => {
         if (!res.ok) throw new Error('Error al cargar pagos');
         return res.json();

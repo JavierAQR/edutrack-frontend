@@ -19,9 +19,9 @@ const DetalleSeccion = () => {
     const fetchData = async () => {
       try {
         const [studentsData, averagesData] = await Promise.all([
-          axios.get(`http://localhost:8080/api/sections/${sectionId}/students`),
+          axios.get(`https://edutrack-backend-rw6y.onrender.com/api/sections/${sectionId}/students`),
           axios.get(
-            `http://localhost:8080/api/sections/${sectionId}/students-averages`
+            `https://edutrack-backend-rw6y.onrender.com/api/sections/${sectionId}/students-averages`
           ),
         ]);
         setStudents(studentsData.data);

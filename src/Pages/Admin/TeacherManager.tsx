@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import TeacherForm from "./TeacherForm";
 
-interface TeacherDTO {
+export interface TeacherDTO {
   id: number;
   username: string;
   name: string;
@@ -33,7 +33,7 @@ const TeacherManager = () => {
   const fetchTeachers = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:8080/api/teachers");
+      const res = await axios.get("https://edutrack-backend-rw6y.onrender.com/api/teachers");
       setTeachers(res.data.data);
       setError(null);
     } catch (err) {
@@ -66,7 +66,7 @@ const TeacherManager = () => {
     }
 
     try {
-      await axios.delete(`http://localhost:8080/api/teachers/${id}`);
+      await axios.delete(`https://edutrack-backend-rw6y.onrender.com/api/teachers/${id}`);
       fetchTeachers();
       setSelectedTeacher(null);
     } catch (err) {

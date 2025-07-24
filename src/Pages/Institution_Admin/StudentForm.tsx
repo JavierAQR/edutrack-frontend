@@ -50,7 +50,7 @@ const StudentForm = ({ initialData, isEditing, academicLevels = [], onSubmit, on
                 if (!token) return;
 
                 const response = await axios.get(
-                    `http://localhost:8080/api/institution-admin/grades-by-level/${formData.academicLevelId}`,
+                    `https://edutrack-backend-rw6y.onrender.com/api/institution-admin/grades-by-level/${formData.academicLevelId}`,
                     { headers: { Authorization: `Bearer ${token}` } }
                 );
                 setGrades(response.data);
@@ -73,7 +73,7 @@ const StudentForm = ({ initialData, isEditing, academicLevels = [], onSubmit, on
                         const token = localStorage.getItem("token");
                         if (token) {
                             const detailResponse = await axios.get(
-                                `http://localhost:8080/api/institution-admin/students/${initialData.id}`,
+                                `https://edutrack-backend-rw6y.onrender.com/api/institution-admin/students/${initialData.id}`,
                                 { headers: { Authorization: `Bearer ${token}` } }
                             );
                             initialData = {
@@ -139,8 +139,8 @@ const StudentForm = ({ initialData, isEditing, academicLevels = [], onSubmit, on
             };
 
             const url = isEditing && initialData?.id
-                ? `http://localhost:8080/api/institution-admin/students/${initialData.id}`
-                : "http://localhost:8080/api/institution-admin/students";
+                ? `https://edutrack-backend-rw6y.onrender.com/api/institution-admin/students/${initialData.id}`
+                : "https://edutrack-backend-rw6y.onrender.com/api/institution-admin/students";
 
             const method = isEditing && initialData?.id ? "PUT" : "POST";
 

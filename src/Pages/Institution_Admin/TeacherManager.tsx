@@ -61,7 +61,7 @@ const TeacherManager = () => {
             if (!token) throw new Error("No authentication token found");
 
             const response = await axios.get(
-                "http://localhost:8080/api/institution-admin/teachers",
+                "https://edutrack-backend-rw6y.onrender.com/api/institution-admin/teachers",
                 { headers: { Authorization: `Bearer ${token}` } }
             );
 
@@ -107,7 +107,7 @@ const TeacherManager = () => {
             if (!token) throw new Error("No authentication token found");
 
             await axios.delete(
-                `http://localhost:8080/api/institution-admin/teachers/${id}`,
+                `https://edutrack-backend-rw6y.onrender.com/api/institution-admin/teachers/${id}`,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             fetchTeachers();

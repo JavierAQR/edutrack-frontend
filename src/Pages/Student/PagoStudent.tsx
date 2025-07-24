@@ -24,7 +24,7 @@ const PagosEstudiante = () => {
     if (!studentId) return;
 
     axios
-      .get(`http://localhost:8080/api/pagos/student/${studentId}`)
+      .get(`https://edutrack-backend-rw6y.onrender.com/api/pagos/student/${studentId}`)
       .then((res) => setPagos(res.data))
       .catch((err) => console.error("Error cargando pagos:", err));
   }, [studentId]);

@@ -1,4 +1,4 @@
-import React, { useState, type ChangeEvent, type FormEvent } from 'react';
+import React, { useState } from 'react';
 import Navbar from "../Components/Navbar";
 
 

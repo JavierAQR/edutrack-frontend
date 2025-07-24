@@ -61,13 +61,13 @@ const TeacherForm = ({ initialData, isEditing, onSubmit, onCancel }: TeacherForm
 
             if (isEditing && initialData?.id) {
                 await axios.put(
-                    `http://localhost:8080/api/institution-admin/teachers/${initialData.id}`,
+                    `https://edutrack-backend-rw6y.onrender.com/api/institution-admin/teachers/${initialData.id}`,
                     formData,
                     { headers: { Authorization: `Bearer ${token}` } }
                 );
             } else {
                 await axios.post(
-                    "http://localhost:8080/api/institution-admin/teachers",
+                    "https://edutrack-backend-rw6y.onrender.com/api/institution-admin/teachers",
                     formData,
                     { headers: { Authorization: `Bearer ${token}` } }
                 );

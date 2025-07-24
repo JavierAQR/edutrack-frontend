@@ -65,7 +65,7 @@ const CourseManager = () => {
             }
 
             const response = await axios.get<Course[]>(
-                `http://localhost:8080/api/institution-admin/courses`,
+                `https://edutrack-backend-rw6y.onrender.com/api/institution-admin/courses`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -90,7 +90,7 @@ const CourseManager = () => {
             if (!token) return;
 
             const response = await axios.get<Grade[]>(
-                `http://localhost:8080/api/institution-admin/courses/grades`,
+                `https://edutrack-backend-rw6y.onrender.com/api/institution-admin/courses/grades`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -124,7 +124,7 @@ const CourseManager = () => {
                 }
 
                 await axios.delete(
-                    `http://localhost:8080/api/institution-admin/courses/${id}`,
+                    `https://edutrack-backend-rw6y.onrender.com/api/institution-admin/courses/${id}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -153,7 +153,7 @@ const CourseManager = () => {
 
             if (editingCourse) {
                 await axios.put(
-                    `http://localhost:8080/api/institution-admin/courses/${editingCourse.id}`,
+                    `https://edutrack-backend-rw6y.onrender.com/api/institution-admin/courses/${editingCourse.id}`,
                     formData,
                     {
                         headers: {
@@ -164,7 +164,7 @@ const CourseManager = () => {
                 toast.success("Curso actualizado correctamente");
             } else {
                 await axios.post(
-                    "http://localhost:8080/api/institution-admin/courses",
+                    "https://edutrack-backend-rw6y.onrender.com/api/institution-admin/courses",
                     formData,
                     {
                         headers: {
