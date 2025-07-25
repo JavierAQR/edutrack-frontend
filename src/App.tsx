@@ -21,7 +21,6 @@ import InstitutionManager from "./Pages/Admin/InstitutionManager";
 import AcademicLevelManager from "./Pages/Admin/AcademicLevelManager";
 import GradeManager from "./Pages/Admin/GradeManager";
 import CourseAssignmentManager from "./Pages/Admin/CourseAssignmentManager";
-import Dashboard from "./Pages/Admin/Dashboard";
 import TeacherManager from "./Pages/Admin/TeacherManager";
 import Institution_TeacherManager from "./Pages/Institution_Admin/TeacherManager";
 import CompleteTeacherProfile from "./Pages/Teacher/CompleteTeacherProfile";
