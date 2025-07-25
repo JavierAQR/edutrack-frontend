@@ -11,7 +11,7 @@ type Grade = {
 
 const initialForm: Grade = {
   name: "",
-  academicLevelId: 0
+  academicLevelId: "" as unknown as number
 };
 
 interface AcademicLevel {
@@ -116,7 +116,7 @@ const GradeManager = () => {
           required
           className="border p-2 rounded"
         >
-          <option value="">Seleccionar Nivel Académico</option>
+          <option value="" disabled>Seleccionar Nivel Académico</option>
           {academicLevels.map((a) => (
             <option key={a.id} value={a.id}>
               {a.name}
