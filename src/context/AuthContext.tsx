@@ -10,7 +10,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [isloading, setIsLoading] = useState<boolean>(true);
     const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
 
-
     useEffect(() => {
         const storedUser = localStorage.getItem("user");
         if (storedUser) {
@@ -30,7 +29,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setUser(null);
         localStorage.removeItem("user");
         localStorage.removeItem('token');
-        window.location.href = "/";
+        window.location.href = "/login";
         setToken(null);
     };
 

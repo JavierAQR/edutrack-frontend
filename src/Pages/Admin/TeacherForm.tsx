@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import type { TeacherDTO } from "./TeacherManager";
 
 interface TeacherFormProps {
-    initialData: TeacherDTO | null;
+    initialData: any;
     isEditing: boolean;
     onSubmit: () => void;
     onCancel: () => void;
@@ -63,11 +62,11 @@ const TeacherForm = ({ initialData, isEditing, onSubmit, onCancel }: TeacherForm
         try {
             if (isEditing && initialData?.id) {
                 await axios.put(
-                    `https://edutrack-backend-rw6y.onrender.com/api/teachers/${initialData.id}`,
+                    `http://localhost:8080/admin/teachers/${initialData.id}`,
                     formData
                 );
             } else {
-                await axios.post("https://edutrack-backend-rw6y.onrender.com/api/teachers", formData);
+                await axios.post("http://localhost:8080/admin/teachers", formData);
             }
             onSubmit();
         } catch (err) {

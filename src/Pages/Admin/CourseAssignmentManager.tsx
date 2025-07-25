@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import type { AcademicLevel, Grade, Institution } from "../../types";
 
 interface CourseDTO {
   id?: number;
@@ -11,6 +10,22 @@ interface CourseDTO {
   academicLevelName?: string;
   institutionId?: number;
   institutionName?: string;
+}
+
+interface Institution {
+  id: number;
+  name: string;
+}
+
+interface AcademicLevel {
+  id: number;
+  name: string;
+}
+
+interface Grade {
+  id: number;
+  name: string;
+  academicLevelId: number;
 }
 
 const initialForm: CourseDTO = {
@@ -38,12 +53,12 @@ const CourseManager = () => {
   const fetchAll = async () => {
     try {
       const [courseRes, gradeRes, instRes] = await Promise.all([
-        axios.get("https://edutrack-backend-rw6y.onrender.com/api/courses"),
-        axios.get("https://edutrack-backend-rw6y.onrender.com/api/grades"),
-        axios.get("https://edutrack-backend-rw6y.onrender.com/api/institutions/dto"),
+        axios.get("http://localhost:8080/admin/courses"),
+        axios.get("http://localhost:8080/admin/grades"),
+        axios.get("http://localhost:8080/admin/institutions/dto"),
       ]);
       setCourses(courseRes.data);
-      setGrades(gradeRes.data.data);
+      setGrades(gradeRes.data);
       setInstitutions(instRes.data);
       console.log(courseRes.data);
     } catch (err) {
@@ -65,7 +80,7 @@ const CourseManager = () => {
 
     try {
       const res = await axios.get(
-        `https://edutrack-backend-rw6y.onrender.com/api/institution-academic-levels/by-institution/${id}`
+        `http://localhost:8080/admin/institution-academic-levels/by-institution/${id}`
       );
       setAvailableLevels(res.data);
       setAvailableGrades([]);
@@ -83,9 +98,9 @@ const CourseManager = () => {
 
     try {
       const res = await axios.get(
-        `https://edutrack-backend-rw6y.onrender.com/api/grades/by-level/${id}`
+        `http://localhost:8080/admin/grades/by-level/${id}`
       );
-      setAvailableGrades(res.data.data);
+      setAvailableGrades(res.data);
     } catch (err) {
       console.error("Error cargando grados:", err);
       setAvailableGrades([]);
@@ -106,11 +121,11 @@ const CourseManager = () => {
     try {
       if (isEditing && editingId !== null) {
         await axios.put(
-          `https://edutrack-backend-rw6y.onrender.com/api/courses/${editingId}`,
+          `http://localhost:8080/admin/courses/${editingId}`,
           formData
         );
       } else {
-        await axios.post("https://edutrack-backend-rw6y.onrender.com/api/courses", formData);
+        await axios.post("http://localhost:8080/admin/courses", formData);
       }
       setFormData(initialForm);
       setIsEditing(false);
@@ -122,25 +137,25 @@ const CourseManager = () => {
   };
 
   const handleEdit = async (course: CourseDTO) => {
-    
-    const selectedGrade = grades.find((g) => g.id === course.gradeId);   
+    const selectedGrade = grades.find((g) => g.id === course.gradeId);
     const levelId =
       course.academicLevelId || selectedGrade?.academicLevelId || 0;
-    const institutionId = course.institutionId || 0;    
+    const institutionId = course.institutionId || 0;
+    console.log(course);
+    
   
     try {
       // Cargar niveles de la institución
       const levelRes = await axios.get(
-        `https://edutrack-backend-rw6y.onrender.com/api/institution-academic-levels/by-institution/${institutionId}`
+        `http://localhost:8080/admin/institution-academic-levels/by-institution/${institutionId}`
       );
-      
       setAvailableLevels(levelRes.data);
   
       // Cargar grados del nivel
       const gradeRes = await axios.get(
-        `https://edutrack-backend-rw6y.onrender.com/api/grades/by-level/${levelId}`
+        `http://localhost:8080/admin/grades/by-level/${levelId}`
       );
-      setAvailableGrades(gradeRes.data.data);
+      setAvailableGrades(gradeRes.data);
   
       // Luego de que ya se han cargado, actualizamos el formData
       setFormData({
@@ -164,7 +179,7 @@ const CourseManager = () => {
 
   const handleDelete = async (id: number) => {
     if (confirm("¿Seguro que deseas eliminar este curso?")) {
-      await axios.delete(`https://edutrack-backend-rw6y.onrender.com/api/courses/${id}`);
+      await axios.delete(`http://localhost:8080/admin/courses/${id}`);
       fetchAll();
     }
   };

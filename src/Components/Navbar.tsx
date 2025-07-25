@@ -40,10 +40,11 @@ const Navbar = ({ children }: Props) => {
     <div className="fixed w-full z-50 bg-transparent text-white">
       {/* Barra superior (contacto + login) */}
       <div
-        className={`${scrolled
-          ? "hidden"
-          : "bg-opacity-80 py-4 px-6 border-b border-gray-500"
-          }`}
+        className={`${
+          scrolled
+            ? "hidden"
+            : "bg-opacity-80 py-4 px-6 border-b border-gray-500"
+        }`}
       >
         <div className="max-w-5xl mx-auto flex justify-between flex-wrap items-center text-sm">
           {/* Contacto */}
@@ -70,8 +71,9 @@ const Navbar = ({ children }: Props) => {
 
       {/* Navbar principal */}
       <nav
-        className={`px-6 ${scrolled ? "bg-white text-black py-3 shadow-md" : "bg-opacity-70 py-5"
-          }`}
+        className={`px-6 ${
+          scrolled ? "bg-white text-black py-3 shadow-md" : "bg-opacity-70 py-5"
+        }`}
       >
         <div className="max-w-5xl mx-auto flex justify-between items-center">
           {/* Logo */}
@@ -91,13 +93,25 @@ const Navbar = ({ children }: Props) => {
             {children || (
               <>
                 <Link
+                  to="/instituciones"
+                  className="hover:text-gray-900 font-medium"
+                >
+                  Instituciones
+                </Link>
+                <Link
+                  to="/certificaciones"
+                  className="hover:text-gray-900 font-medium"
+                >
+                  Certificaciones
+                </Link>
+                <Link
                   to="/servicios"
                   className="hover:text-gray-900 font-medium"
                 >
                   Servicios
                 </Link>
                 <Link
-                  to="/contactanos"
+                  to="/contacto"
                   className="hover:text-gray-900 font-medium"
                 >
                   Contáctanos

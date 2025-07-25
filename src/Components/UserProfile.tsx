@@ -69,7 +69,7 @@ const UserProfile = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        "https://edutrack-backend-rw6y.onrender.com/api/auth/my-complete-profile",
+        "http://localhost:8080/api/auth/my-complete-profile",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -80,11 +80,6 @@ const UserProfile = () => {
 
       if (response.ok) {
         const data = await response.json();
-        const id = data.data.professionalInfo.id;
-        console.log(id);
-        
-        localStorage.setItem('student_id', id);
-        
         const personalInfo = data.data.personalInfo;
 
         const formattedInfo = {
@@ -176,7 +171,7 @@ const UserProfile = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.put<ApiResponse>(
-        "https://edutrack-backend-rw6y.onrender.com/api/users/update-personal-info",
+        "http://localhost:8080/api/users/update-personal-info",
         {
           username: userInfo.username,
           name: userInfo.name,
