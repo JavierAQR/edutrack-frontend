@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'https://edutrack-frontend-xw88.vercel.app/api',
+    baseURL: 'https://edutrack-frontend-xw88.vercel.app',
     withCredentials: true,
     headers: {
         'Content-Type': 'application/json',
