@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { FaUserCircle } from "react-icons/fa";
-import { useNavigate } from "react-router";
 
 const UserDropdown = () => {
     const { user, logout } = useAuth();
     const [open, setOpen] = useState(false);
-    const navigate = useNavigate();
 
     return (
         <div className="relative">
@@ -16,7 +14,6 @@ const UserDropdown = () => {
                         onClick={() => {
                             logout();
                             setOpen(false);
-                            setTimeout(() => navigate("/login"), 0);
                           }}
                         className="block w-full text-left px-4 py-2 text-sm text-black hover:bg-gray-100 cursor-pointer"
                     >
