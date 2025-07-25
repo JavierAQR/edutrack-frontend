@@ -42,6 +42,7 @@ import TareasSeccion from "./Pages/Teacher/TareasSeccion";
 import StudentSectionsView from "./Pages/Student/StudentSectionsView";
 import Institution_CourseManager from "./Pages/Institution_Admin/CourseManager";
 import PagoStudent from "./Pages/Student/PagoStudent";
+import AdministradoresAdmin from "./Pages/AdministradoresAdmin";
 
 function App() {
   return (
@@ -111,6 +112,7 @@ function App() {
             <Route path="/admin" element={<SidebarAdmin />}>
               <Route index element={<Navigate to="dashboard" replace />} />
               <Route path="teachers" element={<TeacherManager />} />
+              <Route path="administrators" element={<AdministradoresAdmin />} />
               <Route path="students" element={<StudentManager />} />
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="institutions" element={<InstitutionManager />} />
