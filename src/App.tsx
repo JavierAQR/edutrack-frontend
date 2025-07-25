@@ -43,12 +43,10 @@ import StudentSectionsView from "./Pages/Student/StudentSectionsView";
 import Institution_CourseManager from "./Pages/Institution_Admin/CourseManager";
 import PagoStudent from "./Pages/Student/PagoStudent";
 
-
 function App() {
   return (
-    <Router>
     <AuthProvider>
-
+      <Router>
         <Routes>
           {/* Rutas públicas */}
           <Route path="/" element={<MainLayout />}>
@@ -62,8 +60,13 @@ function App() {
           </Route>
 
           {/* Rutas de administrador por institución */}
-          <Route element={<VerificationRole allowedRoles={["INSTITUTION_ADMIN"]} />}>
-            <Route path="/institution-admin" element={<SidebarInstitutionAdmin />}>
+          <Route
+            element={<VerificationRole allowedRoles={["INSTITUTION_ADMIN"]} />}
+          >
+            <Route
+              path="/institution-admin"
+              element={<SidebarInstitutionAdmin />}
+            >
               <Route index element={<Navigate to="grades" replace />} />
               <Route path="grades" element={<InstitutionGradeManager />} />
               <Route path="teachers" element={<Institution_TeacherManager />} />
@@ -80,7 +83,7 @@ function App() {
               <Route path="perfil" element={<StudentProfile />} />
               <Route path="sections" element={<StudentSectionsView />} />
               <Route path="payments" element={<PaymentPage />} />
-              <Route path="pagos" element={<PagoStudent />} /> 
+              <Route path="pagos" element={<PagoStudent />} />
             </Route>
             <Route
               path="complete-student-profile"
@@ -120,8 +123,8 @@ function App() {
             </Route>
           </Route>
         </Routes>
-        </AuthProvider>
       </Router>
+    </AuthProvider>
   );
 }
 

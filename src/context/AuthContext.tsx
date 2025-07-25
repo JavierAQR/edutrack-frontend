@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import type { AuthContextType, User } from '../types';
-import { useNavigate } from 'react-router';
 
 
 
@@ -10,7 +9,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [user, setUser] = useState<User | null>(null);
     const [isloading, setIsLoading] = useState<boolean>(true);
     const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
-    const navigate = useNavigate();
+
 
     useEffect(() => {
         const storedUser = localStorage.getItem("user");
@@ -31,7 +30,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setUser(null);
         localStorage.removeItem("user");
         localStorage.removeItem('token');
-        navigate("/login");
+
         setToken(null);
     };
 
