@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Outlet } from "react-router";
 import { RiAdminLine } from "react-icons/ri";
 import { PiChalkboardTeacher, PiStudent } from "react-icons/pi";
-import { FaRegBuilding, FaUserTie } from "react-icons/fa";
+import { FaRegBuilding } from "react-icons/fa";
 import { IoBook } from "react-icons/io5";
 import { HiMiniAcademicCap } from "react-icons/hi2";
 import type { MenuItem } from "../types";
@@ -20,12 +20,7 @@ const menuItems: MenuItem[] = [
   {
     icons: <RiAdminLine size={30} />,
     label: "Administradores",
-    href: "/admin/dashboard",
-  },
-  {
-    icons: <FaUserTie size={30} />,
-    label: "Directores",
-    href: "/admin/dashboard",
+    href: "/admin/administrators",
   },
   {
     icons: <PiChalkboardTeacher size={30} />,
