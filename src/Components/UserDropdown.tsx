@@ -15,9 +15,9 @@ const UserDropdown = () => {
                     <button
                         onClick={() => {
                             logout();
-                            navigate("/login");
                             setOpen(false);
-                        }}
+                            setTimeout(() => navigate("/login"), 0);
+                          }}
                         className="block w-full text-left px-4 py-2 text-sm text-black hover:bg-gray-100 cursor-pointer"
                     >
                         Cerrar sesión
