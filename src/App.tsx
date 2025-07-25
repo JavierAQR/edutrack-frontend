@@ -46,8 +46,9 @@ import PagoStudent from "./Pages/Student/PagoStudent";
 
 function App() {
   return (
+    <Router>
     <AuthProvider>
-      <Router>
+
         <Routes>
           {/* Rutas públicas */}
           <Route path="/" element={<MainLayout />}>
@@ -119,8 +120,8 @@ function App() {
             </Route>
           </Route>
         </Routes>
+        </AuthProvider>
       </Router>
-    </AuthProvider>
   );
 }
 
