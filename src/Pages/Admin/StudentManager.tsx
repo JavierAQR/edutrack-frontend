@@ -33,7 +33,7 @@ const StudentManager = () => {
   const fetchStudents = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("https://edutrack-backend-rw6y.onrender.com/admin/students");
+      const res = await axios.get("https://edutrack-backend-rw6y.onrender.com/api/students");
       setStudents(res.data.data);
       setError(null);
     } catch (err) {
@@ -64,7 +64,7 @@ const StudentManager = () => {
     }
 
     try {
-      await axios.delete(`https://edutrack-backend-rw6y.onrender.com/admin/students/${id}`);
+      await axios.delete(`https://edutrack-backend-rw6y.onrender.com/api/students/${id}`);
       fetchStudents();
       setSelectedStudent(null);
     } catch (err) {

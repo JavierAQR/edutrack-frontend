@@ -94,7 +94,7 @@ const StudentForm: React.FC<StudentFormProps> = ({
           // Primero necesitamos obtener los detalles completos del estudiante
           // incluyendo institutionId y academicLevelId
           const studentRes = await axios.get(
-            `https://edutrack-backend-rw6y.onrender.com/admin/students/${initialData.id}`
+            `https://edutrack-backend-rw6y.onrender.com/api/students/${initialData.id}`
           );
           const studentData = studentRes.data;
 
@@ -229,11 +229,11 @@ const StudentForm: React.FC<StudentFormProps> = ({
 
       if (isEditing && initialData?.id) {
         await axios.put(
-          `https://edutrack-backend-rw6y.onrender.com/admin/students/${initialData.id}`,
+          `https://edutrack-backend-rw6y.onrender.com/api/students/${initialData.id}`,
           payload
         );
       } else {
-        await axios.post("https://edutrack-backend-rw6y.onrender.com/admin/students", payload);
+        await axios.post("https://edutrack-backend-rw6y.onrender.com/api/students", payload);
       }
       onSubmit();
     } catch (err) {
