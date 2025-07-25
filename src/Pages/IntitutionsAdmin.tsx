@@ -9,7 +9,6 @@ interface Institution {
     description: string;
     phone: string;
     website?: string;
-    director?: string;
 }
 
 const InstitutionsAdmin = () => {
@@ -28,8 +27,7 @@ const InstitutionsAdmin = () => {
         address: "",
         description: "",
         phone: "",
-        website: "",
-        director: ""
+        website: ""
     });
 
     // Fetch institutions
@@ -74,8 +72,7 @@ const InstitutionsAdmin = () => {
             address: "",
             description: "",
             phone: "",
-            website: "",
-            director: ""
+            website: ""
         });
         setIsModalOpen(true);
     };
@@ -88,8 +85,7 @@ const InstitutionsAdmin = () => {
             address: institution.address || "",
             description: institution.description,
             phone: institution.phone,
-            website: institution.website || "",
-            director: institution.director || ""
+            website: institution.website || ""
         });
         setIsModalOpen(true);
     };
@@ -238,19 +234,6 @@ const InstitutionsAdmin = () => {
                                         />
                                     </div>
 
-                                    <div className="mb-4">
-                                        <label htmlFor="director" className="block text-sm font-medium text-gray-700">Director</label>
-                                        <input
-                                            type="text"
-                                            name="director"
-                                            id="director"
-                                            value={formData.director}
-                                            onChange={handleInputChange}
-                                            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                                        />
-                                    </div>
-
-
                                     <div className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
                                         <button
                                             type="submit"
@@ -365,9 +348,6 @@ const InstitutionsAdmin = () => {
                                     Sitio Web
                                 </th>
                                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Director
-                                </th>
-                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Acciones
                                 </th>
                             </tr>
@@ -402,9 +382,6 @@ const InstitutionsAdmin = () => {
                                                     {institution.website}
                                                 </a>
                                             ) : '-'}
-                                        </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {institution.director || "-"}
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <button

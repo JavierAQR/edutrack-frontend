@@ -1,16 +1,16 @@
 import axios from "axios";
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router";
-import Navbar from "../../Components/Navbar";
+import Navbar from "../Components/Navbar";
+import Footer from "../Components/Footer";
 
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 import { jwtDecode } from "jwt-decode";
 
 // Interfaz para los datos que vienen en el token
 interface JwtPayload {
   sub: string; // username
   role: string; // rol del usuario
-  institutionId: number; //id de institucion de usuario
   exp: number; // expiración
 }
 
@@ -27,14 +27,13 @@ const Login = () => {
   const checkProfileStatus = async (token: string) => {
     try {
       const response = await axios.get(
-        "https://edutrack-backend-rw6y.onrender.com/api/auth/profile-status",
+        "http://localhost:8080/api/auth/profile-status",
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-      
       return response.data;
     } catch (error) {
       console.error("Error checking profile status:", error);
@@ -42,20 +41,18 @@ const Login = () => {
     }
   };
 
-  const completeProfileRoutes: Record<string, string> = {
-    TEACHER: "/complete-teacher-profile",
-    STUDENT: "/complete-student-profile",
-  };
-
+  // Función para redirigir según el rol y estado del perfil
   const redirectUser = async (role: string, token: string) => {
-    if (role === "TEACHER" || role === "STUDENT") {
+    // Si es TEACHER, verificar si necesita completar perfil
+    if (role === "TEACHER") {
       const profileStatus = await checkProfileStatus(token);
-      if (role in completeProfileRoutes && profileStatus?.needsProfileCompletion) {
-        navigate(completeProfileRoutes[role]);
+
+      if (profileStatus?.needsProfileCompletion) {
+        navigate("/complete-teacher-profile");
         return;
       }
     }
-
+    // Redirección normal según el rol
     switch (role) {
       case "ADMIN":
         navigate("/admin");
@@ -64,10 +61,10 @@ const Login = () => {
         navigate("/estudiante");
         break;
       case "TEACHER":
-        navigate("/profesor");
+        navigate("/profesor"); // Dashboard del profesor
         break;
-      case "INSTITUTION_ADMIN":
-        navigate("/institution-admin");
+      case "DIRECTOR":
+        navigate("/director");
         break;
       case "PARENT":
         navigate("/padre");
@@ -84,7 +81,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "https://edutrack-backend-rw6y.onrender.com/api/auth/login",
+        "http://localhost:8080/api/auth/login",
         {
           username,
           password,
@@ -92,19 +89,21 @@ const Login = () => {
       );
 
       if (response.data.authStatus === "LOGIN_SUCCESS") {
-        setSuccessMessage("Inicio de sesión exitoso");
+        setSuccessMessage("Inicio de sesión exitoso"); // Muestra el mensaje de éxito
+        // Guarda el token JWT en el almacenamiento local para futuras solicitudes
         const token = response.data.token;
         localStorage.setItem("token", token);
 
-        const decoded = jwtDecode<JwtPayload>(token);     
+        // Decodificamos el token
+        const decoded = jwtDecode<JwtPayload>(token);
         const role = decoded.role;
-        
+
         login(response.data.token, {
           username: username,
           role: role,
-          institutionId: decoded.institutionId
         });
 
+        // Redirigir según el rol y estado del perfil
         await redirectUser(role, token);
       }
     } catch (err: unknown) {
@@ -244,6 +243,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

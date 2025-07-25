@@ -51,8 +51,8 @@ const InstitutionGradeManager = () => {
   const fetchData = async () => {
     try {
       const [igRes, instRes] = await Promise.all([
-        axios.get("https://edutrack-backend-rw6y.onrender.com/api/institution-grades"),
-        axios.get("https://edutrack-backend-rw6y.onrender.com/api/institutions/dto"),
+        axios.get("http://localhost:8080/admin/institution-grades"),
+        axios.get("http://localhost:8080/admin/institutions/dto"),
       ]);
       setInstitutionGrades(igRes.data);
       setInstitutions(instRes.data);
@@ -78,7 +78,7 @@ const InstitutionGradeManager = () => {
       if (!isNaN(parsedValue)) {
         axios
           .get(
-            `https://edutrack-backend-rw6y.onrender.com/api/institution-academic-levels/by-institution/${parsedValue}`
+            `http://localhost:8080/admin/institution-academic-levels/by-institution/${parsedValue}`
           )
           .then((res) => {
             setAvailableLevels(res.data);
@@ -94,9 +94,9 @@ const InstitutionGradeManager = () => {
     if (name === "academicLevelId") {
       if (!isNaN(parsedValue)) {
         axios
-          .get(`https://edutrack-backend-rw6y.onrender.com/api/grades/by-level/${parsedValue}`)
+          .get(`http://localhost:8080/admin/grades/by-level/${parsedValue}`)
           .then((res) => {
-            setAvailableGrades(res.data.data);
+            setAvailableGrades(res.data);
           })
           .catch((err) => {
             console.error("Error cargando grados:", err);
@@ -111,12 +111,12 @@ const InstitutionGradeManager = () => {
     try {
       if (isEditing && editingId !== null) {
         await axios.put(
-          `https://edutrack-backend-rw6y.onrender.com/api/institution-grades/${editingId}`,
+          `http://localhost:8080/admin/institution-grades/${editingId}`,
           formData
         );
       } else {
         await axios.post(
-          "https://edutrack-backend-rw6y.onrender.com/api/institution-grades",
+          "http://localhost:8080/admin/institution-grades",
           formData
         );
       }
@@ -141,13 +141,13 @@ const InstitutionGradeManager = () => {
     // Precargar niveles y grados disponibles para edición
     axios
       .get(
-        `https://edutrack-backend-rw6y.onrender.com/api/institution-academic-levels/by-institution/${data.institutionId}`
+        `http://localhost:8080/admin/institution-academic-levels/by-institution/${data.institutionId}`
       )
       .then((res) => setAvailableLevels(res.data));
 
     axios
       .get(
-        `https://edutrack-backend-rw6y.onrender.com/api/grades/by-level/${data.academicLevelId}`
+        `http://localhost:8080/admin/grades/by-level/${data.academicLevelId}`
       )
       .then((res) => setAvailableGrades(res.data));
   };
@@ -157,7 +157,7 @@ const InstitutionGradeManager = () => {
     if (!confirm) return;
     try {
       await axios.delete(
-        `https://edutrack-backend-rw6y.onrender.com/api/institution-grades/${id}`
+        `http://localhost:8080/admin/institution-grades/${id}`
       );
       fetchData();
     } catch (err) {

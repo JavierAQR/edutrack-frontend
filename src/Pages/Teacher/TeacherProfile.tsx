@@ -46,19 +46,17 @@ const TeacherProfile = () => {
       setLoading(true);
       const token = localStorage.getItem("token");
       const response = await fetch(
-        "https://edutrack-backend-rw6y.onrender.com/api/teacher-profile/my-profile",
+        "http://localhost:8080/api/teacher-profile/my-profile",
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
+      console.log(response);
       if (response.ok) {
         const result = await response.json();
-        const id = result.data.id;
-        console.log(id);
-        localStorage.setItem('teacher_id', id);
-        
+        console.log(result);
 
         if (result.data) {
           setProfileData(result.data);
@@ -120,7 +118,7 @@ const TeacherProfile = () => {
       }
       const token = localStorage.getItem("token");
       const response = await fetch(
-        "https://edutrack-backend-rw6y.onrender.com/api/teacher-profile/update-professional-info",
+        "http://localhost:8080/api/teacher-profile/update-professional-info",
         {
           method: "PUT",
           headers: {

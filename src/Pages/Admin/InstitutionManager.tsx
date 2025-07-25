@@ -8,7 +8,6 @@ type Institution = {
   description: string;
   phone: string;
   website?: string;
-  director?: string;
   academicLevels?: string[];
 };
 
@@ -18,7 +17,6 @@ const initialForm: Institution = {
   description: "",
   phone: "",
   website: "",
-  director: "",
 };
 
 const InstitutionManager = () => {
@@ -35,7 +33,7 @@ const InstitutionManager = () => {
   const fetchInstitutions = async () => {
     try {
       const res = await axios.get(
-        "https://edutrack-backend-rw6y.onrender.com/api/institutions/dto"
+        "http://localhost:8080/admin/institutions/dto"
       );
       setInstitutions(res.data);
     } catch (error) {
@@ -56,26 +54,25 @@ const InstitutionManager = () => {
     e.preventDefault();
 
     const dataToSend = {
-      name: formData.name,
-      address: formData.address,
-      description: formData.description,
-      phone: formData.phone,
-      website: formData.website,
-      director: formData.director
-    };
+        name: formData.name,
+        address: formData.address,
+        description: formData.description,
+        phone: formData.phone,
+        website: formData.website,
+      };
 
     try {
       if (isEditing && editingId !== null) {
         // Actualizar institución existente
 
         await axios.put(
-          `https://edutrack-backend-rw6y.onrender.com/api/institutions/${editingId}`,
+          `http://localhost:8080/admin/institutions/${editingId}`,
           dataToSend
         );
       } else {
         // Crear nueva institución
         await axios.post(
-          "https://edutrack-backend-rw6y.onrender.com/api/institutions",
+          "http://localhost:8080/admin/institutions",
           dataToSend
         );
       }
@@ -101,7 +98,7 @@ const InstitutionManager = () => {
     if (!confirm) return;
 
     try {
-      await axios.delete(`https://edutrack-backend-rw6y.onrender.com/api/institutions/${id}`);
+      await axios.delete(`http://localhost:8080/admin/institutions/${id}`);
       fetchInstitutions();
     } catch (error) {
       console.error("Error al eliminar institución:", error);
@@ -151,14 +148,6 @@ const InstitutionManager = () => {
           onChange={handleChange}
           className="border p-2 rounded"
         />
-        <input
-          type="text"
-          name="director"
-          placeholder="Director"
-          value={formData.director}
-          onChange={handleChange}
-          className="border p-2 rounded col-span-full"
-        />
         <textarea
           name="description"
           placeholder="Descripción"
@@ -169,8 +158,9 @@ const InstitutionManager = () => {
         />
         <button
           type="submit"
-          className={`bg-blue-600 text-white rounded px-4 py-2 hover:bg-blue-700 ${isEditing ? "" : "col-span-2"
-            }`}
+          className={`bg-blue-600 text-white rounded px-4 py-2 hover:bg-blue-700 ${
+            isEditing ? "" : "col-span-2"
+          }`}
         >
           {isEditing ? "Actualizar Institución" : "Guardar Institución"}
         </button>
@@ -207,9 +197,6 @@ const InstitutionManager = () => {
             </th>
             <th className="px-4 py-3 text-left text-sm font-semibold">
               Sitio web
-            </th>
-            <th className="px-4 py-3 text-left text-sm font-semibold">
-              Director
             </th>
             <th className="px-4 py-3 text-left text-sm font-semibold">
               Niveles Académicos

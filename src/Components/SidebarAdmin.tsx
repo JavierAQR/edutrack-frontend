@@ -2,7 +2,7 @@
 import { TbReportSearch } from "react-icons/tb";
 import { MdOutlineDashboard } from "react-icons/md";
 import { useState } from "react";
-import { Outlet } from "react-router";
+import { Navigate, Outlet } from "react-router";
 import { RiAdminLine } from "react-icons/ri";
 import { PiChalkboardTeacher, PiStudent } from "react-icons/pi";
 import { FaRegBuilding, FaUserTie } from "react-icons/fa";
@@ -10,6 +10,8 @@ import { IoBook } from "react-icons/io5";
 import { HiMiniAcademicCap } from "react-icons/hi2";
 import type { MenuItem } from "../types";
 import UserLayout from "./UserLayout";
+import { useAuth } from "../context/AuthContext";
+import { useLocation } from "react-router";
 
 const menuItems: MenuItem[] = [
   {
@@ -17,10 +19,11 @@ const menuItems: MenuItem[] = [
     label: "Dashboard",
     href: "/admin/dashboard",
   },
+
   {
     icons: <RiAdminLine size={30} />,
     label: "Administradores",
-    href: "/admin/dashboard",
+    href: "/admin/administrators",
   },
   {
     icons: <FaUserTie size={30} />,
@@ -59,14 +62,33 @@ const menuItems: MenuItem[] = [
   },
 ];
 
-const SidebarAdmin = () => {
+interface Props {
+  allowedRoles: string[];
+}
+
+const SidebarAdmin = ({ allowedRoles }: Props) => {
   const [open, setOpen] = useState<boolean>(true);
+  const { user, isloading } = useAuth();
+  const location = useLocation();
+
+  if (isloading) {
+    return <div>Cargando...</div>;
+  }
+
+  if (!user) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  if (!allowedRoles.includes(user.role)) {
+    // Usuario autenticado pero sin permisos
+    return <Navigate to="/unauthorized" replace />;
+  }
 
   return (
     <UserLayout
       open={open}
       setOpen={setOpen}
-      userType={"ADMIN"}
+      userType={user.role}
       menuItems={menuItems}
     >
       <Outlet />

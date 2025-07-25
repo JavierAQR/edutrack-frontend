@@ -6,12 +6,12 @@ type Grade = {
   id?: number;
   name: string;
   academicLevelId: number;
-  academicLevel?: AcademicLevel;
+  academicLevelName?: string;
 };
 
 const initialForm: Grade = {
   name: "",
-  academicLevelId: "" as unknown as number
+  academicLevelId: 0
 };
 
 interface AcademicLevel {
@@ -33,12 +33,12 @@ const GradeManager = () => {
   const fetchGrades = async () => {
     try {
      const [gradeRes, levelRes] = await Promise.all([
-            axios.get("https://edutrack-backend-rw6y.onrender.com/api/grades"),
-            axios.get("https://edutrack-backend-rw6y.onrender.com/api/academic-levels"),
+            axios.get("http://localhost:8080/admin/grades"),
+            axios.get("http://localhost:8080/admin/academic-levels"),
       ]);
-      setGrades(gradeRes.data.data);
-      setAcademicLevels(levelRes.data.data);
-      console.log(gradeRes.data.data);
+      setGrades(gradeRes.data);
+      setAcademicLevels(levelRes.data);
+      console.log(gradeRes.data);
     } catch (error) {
       console.error("Error al obtener grados:", error);
     }
@@ -59,11 +59,11 @@ const GradeManager = () => {
     try {
       if (isEditing && editingId !== null) {
         await axios.put(
-          `https://edutrack-backend-rw6y.onrender.com/api/grades/${editingId}`,
+          `http://localhost:8080/admin/grades/${editingId}`,
           formData
         );
       } else {
-        await axios.post("https://edutrack-backend-rw6y.onrender.com/api/grades", formData);
+        await axios.post("http://localhost:8080/admin/grades", formData);
       }
       setFormData(initialForm);
       setIsEditing(false);
@@ -85,7 +85,7 @@ const GradeManager = () => {
     if (!confirm) return;
 
     try {
-      await axios.delete(`https://edutrack-backend-rw6y.onrender.com/api/grades/${id}`);
+      await axios.delete(`http://localhost:8080/admin/grades/${id}`);
       fetchGrades();
     } catch (error) {
       console.error("Error al eliminar grado:", error);
@@ -116,7 +116,7 @@ const GradeManager = () => {
           required
           className="border p-2 rounded"
         >
-          <option value="" disabled>Seleccionar Nivel Académico</option>
+          <option value="">Seleccionar Nivel Académico</option>
           {academicLevels.map((a) => (
             <option key={a.id} value={a.id}>
               {a.name}
@@ -166,7 +166,7 @@ const GradeManager = () => {
           {grades.map((grade) => (
             <tr key={grade.id} className="hover:bg-gray-50 transition-colors">
               <td className="px-4 py-3">{grade.name}</td>
-              <td className="px-4 py-3">{grade.academicLevel?.name}</td>
+              <td className="px-4 py-3">{grade.academicLevelName}</td>
               <td className="flex justify-center px-4 py-3 space-x-2">
                 <button
                   onClick={() => handleEdit(grade)}
